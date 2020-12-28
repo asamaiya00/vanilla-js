@@ -103,7 +103,7 @@ body {
     width: 100%;
     margin: 15px 0;
     transform: rotateX(-45deg);
-    box-shadow: 0 8px 10px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.7);
 }
  
 p.text {
