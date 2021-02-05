@@ -16,12 +16,29 @@
   <body>
     <h1>Custom Video Player</h1>
     <video
-      controls
       src="python.mp4"
       id="video"
       class="screen"
       poster="poster.png"
     ></video>
+    <div class="controls">
+      <button class="btn" id="play">
+        <i class="fa fa-play fa-2x"></i>
+      </button>
+      <button class="btn" id="stop">
+        <i class="fa fa-stop fa-2x"></i>
+      </button>
+      <input
+        type="range"
+        class="progress"
+        id="progress"
+        min="0"
+        max="100"
+        step="0.1"
+        value="0"
+      />
+      <span class="timespan" id="timespan">00:00</span>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
