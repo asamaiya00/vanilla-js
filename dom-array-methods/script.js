@@ -39,8 +39,16 @@ function updateDom(persons = data) {
     })
 }
 
+function doubleMoney() {
+    data = data.map(person => {
+        return {...person,money: person.money *2};
+    });
+    updateDom()
+}
+
 function formatMoney(number) {
     return '₹' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
 
 addBtn.addEventListener('click',getRandomUser);
+doubleBtn.addEventListener('click',doubleMoney);
