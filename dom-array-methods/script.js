@@ -49,6 +49,10 @@ function showMillionaires() {
     data = data.filter(person => person.money >= 1000000);
     updateDom()
 }
+function sortByHighest() {
+    data.sort((a,b) =>  b.money - a.money);
+    updateDom()
+}
 
 function formatMoney(number) {
     return '₹' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -57,3 +61,4 @@ function formatMoney(number) {
 addBtn.addEventListener('click',getRandomUser);
 doubleBtn.addEventListener('click',doubleMoney);
 showMillionairesBtn.addEventListener('click',showMillionaires);
+sortBtn.addEventListener('click',sortByHighest);
