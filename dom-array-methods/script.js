@@ -53,6 +53,13 @@ function sortByHighest() {
     data.sort((a,b) =>  b.money - a.money);
     updateDom()
 }
+function calculate() {
+    const total = data.reduce((acc,user)=> acc + user.money,0)
+
+    const wealthEl = document.createElement('div');
+    wealthEl.innerHTML = `<h3>Total Wealth <strong>${formatMoney(total)}</strong></h3>`
+    main.appendChild(wealthEl)
+}
 
 function formatMoney(number) {
     return '₹' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -62,3 +69,4 @@ addBtn.addEventListener('click',getRandomUser);
 doubleBtn.addEventListener('click',doubleMoney);
 showMillionairesBtn.addEventListener('click',showMillionaires);
 sortBtn.addEventListener('click',sortByHighest);
+calculateWealthBtn.addEventListener('click',calculate);
