@@ -11,6 +11,11 @@
 body {
   font-family: "Lato", sans-serif;
   margin: 0;
+  transition: ease 0.3s;
+}
+
+body.show-nav {
+    transform: translateX(200px);
 }
 
 nav {
@@ -105,6 +110,10 @@ input[type="submit"] {
   background-color: rgba(0, 0, 0, 0.6);
   display: none;
 }
+ 
+.modal-container.show-modal{
+    display: block;
+}
 
 .modal {
   position: absolute;
@@ -117,8 +126,9 @@ input[type="submit"] {
   overflow: hidden;
   width: 400px;
   max-width: 100%;
+  animation: modalopen var(--modal-duration);
 }
- 
+
 .modal-header {
   background-color: var(--primary-color);
   color: white;
@@ -152,4 +162,14 @@ input[type="submit"] {
 .form-input{
     width: 100%;
     padding: 8px;
+}
+
+@keyframes modalopen {
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
 }
