@@ -49,6 +49,47 @@ button {
   cursor: pointer;
 }
 
+.meals {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  margin-top: 20px;
+}
+
+.meal {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+
+.meal img {
+  height: 100%;
+  width: 100%;
+  border: 4px white solid;
+  border-radius: 4px;
+}
+
+.meal-info {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+.meal-info:hover {
+  opacity: 1;
+}
+
 @media (max-width: 500px) {
   #search {
     width: 100%;
