@@ -14,7 +14,7 @@ const transactions = [
 ];
 
 function addTransactionToDOM(transaction) {
-  const sign = transaction.amount < 0 ? "+" : "-";
+  const sign = transaction.amount < 0 ? "-" : "+";
   const item = document.createElement("li");
 
   item.classList.add(sign == "+" ? "plus" : "minus");
@@ -28,9 +28,29 @@ function addTransactionToDOM(transaction) {
   list.appendChild(item);
 }
 
+function updateValues() {
+  const amounts = transactions.map((t) => t.amount);
+
+  const total = amounts.reduce((acc, amt) => acc + amt, 0).toFixed(2);
+
+  const income = amounts
+    .filter((trans) => trans >= 0)
+    .reduce((acc, amt) => acc + amt, 0)
+    .toFixed(2);
+
+  const expense = (
+    amounts.filter((trans) => trans < 0).reduce((acc, amt) => acc + amt, 0) * -1
+  ).toFixed(2);
+    
+  balance.innerHTML = `₹${total}`;
+  money_plus.innerHTML = `₹${income}`;
+  money_minus.innerHTML = `₹${expense}`;
+}
+
 function init() {
   list.innerHTML = "";
   transactions.forEach(addTransactionToDOM);
+  updateValues()
 }
 
 init();
