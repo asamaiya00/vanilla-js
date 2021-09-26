@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 100vh;
+  font-family: "Lato", sans-serif;
+}
+
+.container {
+  margin: 20px auto;
+  width: 400px;
+}
+
+h2 {
+  letter-spacing: 1px;
+}
+
+h3 {
+  border-bottom: 1px grey solid;
+  padding-bottom: 10px;
+}
+
+h4 {
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.inc-exp-container {
+  display: flex;
+  background-color: white;
+  justify-content: space-between;
+  box-shadow: var(--box-shadow);
+  margin: 10px;
+}
+
+.inc-exp-container > div {
+  flex: auto;
+  text-align: center;
+  margin: 10px 2px;
+}
+
+.inc-exp-container > div:first-of-type {
+  border-right: 1px lightgray solid;
+}
+
+.money {
+  font-size: 20px;
+  margin: 10px 0;
+  letter-spacing: 1px;
+}
+
+.money.plus {
+  color: lime;
+}
+
+.money.minus {
+  color: crimson;
+}
+
+label {
+  margin: 10px 0;
+  display: inline-block;
+}
+
+input {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0px;
+  font-size: 16px;
+  border: 1px lightgray solid;
+  outline: none;
+}
+
+.btn {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0px;
+  font-size: 16px;
+  border: 1px lightgray solid;
+  outline: none;
+  background-color: #5100ff;
+  color: white;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.list {
+  list-style-type: none;
+  background-color: white;
+  padding: 0;
+}
+.list li {
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  display: flex;
+  padding: 5px 10px;
+  justify-content: space-between;
+  position: relative;
+}
+
+li.minus {
+  border-right: 5px solid crimson;
+}
+li.plus {
+  border-right: 5px solid lime;
+}
+
+.delete-btn {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  background-color: red;
+  cursor: pointer;
+  border: 0;
+  color: white;
+  padding: 2px 4px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+li:hover .delete-btn {
+  opacity: 1;
+}
