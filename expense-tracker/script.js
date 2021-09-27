@@ -6,7 +6,7 @@ const text = document.getElementById("text");
 const amount = document.getElementById("amount");
 const list = document.getElementById("list");
 
-const transactions = [
+let transactions = [
   { id: 1, text: "Flower", amount: -20 },
   { id: 2, text: "Cash", amount: 300 },
   { id: 3, text: "Food", amount: -100 },
@@ -22,10 +22,38 @@ function addTransactionToDOM(transaction) {
   item.innerHTML = `
     ${transaction.text} <span>${sign}${Math.abs(
     transaction.amount
-  )}</span> <button class="delete-btn">x</button>
+  )}</span> <button class="delete-btn" 
+  onclick="removeTransaction(${transaction.id})">x</button>
   `;
 
   list.appendChild(item);
+}
+
+function addTransaction(e) {
+  e.preventDefault();
+  if (text.value.trim() === "" || amount.value.trim() === "")
+    alert("Please enter text and amount");
+  else {
+    const trans = {
+      id: Math.floor(Math.random() * 1000000000),
+      text: text.value,
+      amount: +amount.value,
+    };
+
+    transactions.push(trans);
+
+    addTransactionToDOM(trans);
+
+    updateValues();
+
+    text.value = "";
+    amount.value = "";
+  }
+}
+
+function removeTransaction(id) {
+  transactions = transactions.filter((trans) => trans.id !== id);
+  init();
 }
 
 function updateValues() {
@@ -41,7 +69,7 @@ function updateValues() {
   const expense = (
     amounts.filter((trans) => trans < 0).reduce((acc, amt) => acc + amt, 0) * -1
   ).toFixed(2);
-    
+
   balance.innerHTML = `₹${total}`;
   money_plus.innerHTML = `₹${income}`;
   money_minus.innerHTML = `₹${expense}`;
@@ -50,7 +78,9 @@ function updateValues() {
 function init() {
   list.innerHTML = "";
   transactions.forEach(addTransactionToDOM);
-  updateValues()
+  updateValues();
 }
 
 init();
+
+form.addEventListener("submit", addTransaction);
