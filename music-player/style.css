@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lato", sans-serif;
+  background: linear-gradient(
+    0deg,
+    rgba(247, 247, 247) 23%,
+    rgba(250, 200, 200) 92%
+  );
+  height: 100vh;
+}
+
+.music-container {
+  background-color: white;
+  box-shadow: 0 20px 20px 0 rgba(252, 150, 150, 0.5);
+  padding: 10px 30px;
+  margin: 100px 0;
+  border-radius: 15px;
+  display: flex;
+  position: relative;
+  z-index: 10;
+}
+
+.img-container {
+  position: relative;
+  width: 110px;
+}
+.img-container img {
+  position: absolute;
+  width: inherit;
+  object-fit: cover;
+  height: 110px;
+  border-radius: 50%;
+  bottom: 0;
+  left: 0;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.music-container.play .img-container img {
+  animation-play-state: running;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.action-btn {
+  padding: 10px;
+  margin: 0 20px;
+  background-color: white;
+  outline: none;
+  border: none;
+  color: #c8c8c8;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.action-btn-big {
+  color: #b8b8b8;
+  font-size: 30px;
+}
