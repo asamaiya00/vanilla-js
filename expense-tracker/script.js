@@ -6,12 +6,12 @@ const text = document.getElementById("text");
 const amount = document.getElementById("amount");
 const list = document.getElementById("list");
 
-let transactions = [
-  { id: 1, text: "Flower", amount: -20 },
-  { id: 2, text: "Cash", amount: 300 },
-  { id: 3, text: "Food", amount: -100 },
-  { id: 4, text: "Cheque", amount: 500 },
-];
+const localStorageTransactions = JSON.parse(
+  localStorage.getItem("transactions")
+);
+
+let transactions =
+  localStorage.getItem("transactions") !== null ? localStorageTransactions : [];
 
 function addTransactionToDOM(transaction) {
   const sign = transaction.amount < 0 ? "-" : "+";
@@ -44,6 +44,8 @@ function addTransaction(e) {
 
     addTransactionToDOM(trans);
 
+    updateLocalStorage();
+
     updateValues();
 
     text.value = "";
@@ -53,6 +55,7 @@ function addTransaction(e) {
 
 function removeTransaction(id) {
   transactions = transactions.filter((trans) => trans.id !== id);
+  updateLocalStorage();
   init();
 }
 
@@ -75,6 +78,9 @@ function updateValues() {
   money_minus.innerHTML = `₹${expense}`;
 }
 
+function updateLocalStorage() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+}
 function init() {
   list.innerHTML = "";
   transactions.forEach(addTransactionToDOM);
