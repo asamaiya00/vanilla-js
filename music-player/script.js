@@ -37,8 +37,33 @@ function pauseSong() {
   audio.pause();
 }
 
+function updateProgress(e) {
+  const { duration, currentTime } = e.srcElement;
+  progress.style.width = `${(currentTime / duration) * 100}%`;
+}
+
+function setProgress(e) {
+  const { offsetX } = e;
+  audio.currentTime = (offsetX / this.clientWidth) * audio.duration;
+}
+
+function playNextSong() {
+  songIndex = songIndex < songs.length - 1 ? songIndex + 1 : 0;
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
 playBtn.addEventListener("click", () => {
   const isPlaying = musicContainer.classList.contains("play");
   isPlaying ? pauseSong() : playSong();
 });
+prevBtn.addEventListener("click", () => {
+  songIndex = songIndex > 0 ? songIndex - 1 : songs.length - 1;
+  loadSong(songs[songIndex]);
+  playSong();
+});
+nextBtn.addEventListener("click", playNextSong);
 
+audio.addEventListener("timeupdate", updateProgress);
+progressContainer.addEventListener("click", setProgress);
+audio.addEventListener("ended", playNextSong);
