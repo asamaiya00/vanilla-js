@@ -38,6 +38,12 @@ let randomWord,
   score = 0,
   time = 10;
 
+let difficulty =
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "medium";
+
+difficultySelect.value = difficulty ? difficulty : "medium";
 function getRandomWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
@@ -83,7 +89,23 @@ text.addEventListener("input", (e) => {
     addWordToDOM();
     updateScore();
     e.target.value = "";
-    time += 5;
+    if (difficulty === "easy") {
+      time += 5;
+    } else if (difficulty === "medium") {
+      time += 3;
+    } else {
+      time += 2;
+    }
     updateTime();
   }
+});
+
+settingsBtn.addEventListener("click", () => {
+  settings.classList.toggle("hide");
+});
+
+settingsForm.addEventListener("change", (e) => {
+  difficulty = e.target.value;
+  localStorage.setItem("difficulty", difficulty);
+  text.focus()
 });

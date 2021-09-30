@@ -35,6 +35,11 @@ button {
   background-color: rgb(33, 167, 115);
   width: 100%;
   font-size: 20px;
+  transform: translateY(0px);
+  transition: transform 0.3s ease-in;
+}
+.settings.hide {
+  transform: translateY(-100%);
 }
 
 select {
