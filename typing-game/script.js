@@ -54,11 +54,36 @@ function updateScore() {
   scoreEl.innerText = score;
 }
 
+const timeInterval = setInterval(updateTime, 1000);
+
+function updateTime() {
+  time--;
+  timeEl.innerHTML = time + "s";
+
+  if (time <= 0) {
+    clearInterval(timeInterval);
+
+    endGame();
+  }
+}
+
+function endGame() {
+  endGameContainer.innerHTML = `
+        <h1>Time ran out</h1>
+        <h2>Your score is ${score}</h2>
+        <button onclick="location.reload()">Reload</button>
+      `;
+
+  endGameContainer.style.display = "flex";
+}
+
 text.addEventListener("input", (e) => {
   const insertedText = e.target.value;
   if (insertedText.toLowerCase() === randomWord) {
     addWordToDOM();
     updateScore();
     e.target.value = "";
+    time += 5;
+    updateTime();
   }
 });
