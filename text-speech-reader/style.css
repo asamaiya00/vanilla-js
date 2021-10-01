@@ -50,7 +50,11 @@ h1 {
   top: 30%;
   transform: translate(-50%, -800px);
   padding: 20px;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.text-box.show {
+  transform: translate(-50%, 0px);
 }
 
 .text-box select {
