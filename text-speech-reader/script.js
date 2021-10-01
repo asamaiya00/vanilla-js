@@ -109,6 +109,15 @@ closeBtn.addEventListener("click", () =>
   document.getElementById("text-box").classList.remove("show")
 );
 
+voicesSelect.addEventListener("change", (e) => {
+  message.voice = voices.find((voice) => voice.name === e.target.value);
+});
+
+readBtn.addEventListener("click", () => {
+  setMessageText(textarea.value);
+  speakText();
+});
+
 speechSynthesis.addEventListener("voiceschanged", getVoices);
 
 // getVoices();
