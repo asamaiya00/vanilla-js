@@ -65,12 +65,29 @@ function createBox({ image, text }) {
         <p class="info" >${text}</p>
     `;
 
+  boxEl.addEventListener("click", () => {
+    setMessageText(text);
+    speakText();
+
+    boxEl.classList.add("active");
+    setTimeout(() => boxEl.classList.remove("active"), 1000);
+  });
   main.appendChild(boxEl);
 }
 
 data.forEach(createBox);
 
 let voices = [];
+
+const message = new SpeechSynthesisUtterance();
+
+function setMessageText(text) {
+  message.text = text;
+}
+
+function speakText() {
+  speechSynthesis.speak(message);
+}
 
 function getVoices() {
   voices = window.speechSynthesis.getVoices();
