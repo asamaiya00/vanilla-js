@@ -4,23 +4,20 @@ const cardsContainer = document.getElementById("cards-container");
 const nextBtn = document.getElementById("next");
 const current = document.getElementById("current");
 const prevBtn = document.getElementById("prev");
+const showBtn = document.getElementById("show");
+const hideBtn = document.getElementById("hide");
+const addCardBtn = document.getElementById("add-card");
+const addContainer = document.getElementById("add-container");
+const questionTextArea = document.getElementById("question");
+const answerTextArea = document.getElementById("answer");
+const clearBtn = document.getElementById("clear");
 
 let currentActiveCard = 0;
 
-const cardsData = [
-  {
-    question: "What is a Variable?",
-    answer: "Storage Container",
-  },
-  {
-    question: "What is React?",
-    answer: "A JavaScript library",
-  },
-  {
-    question: "What is Angular?",
-    answer: "A JavaScript Framework",
-  },
-];
+const cardsData =
+  localStorage.getItem("cards") === null
+    ? []
+    : JSON.parse(localStorage.getItem("cards"));
 
 function createCards() {
   cardsData.forEach((card, index) => createCard(card, index));
@@ -30,7 +27,7 @@ function createCard(card, index) {
   const cardEl = document.createElement("div");
 
   cardEl.classList.add("card");
-  if (index === 0) {
+  if (cardsEl.length == 0 || index === 0) {
     cardEl.classList.add("active");
   }
 
@@ -80,4 +77,31 @@ prevBtn.addEventListener("click", () => {
   cardsEl[currentActiveCard].className = "card active";
 
   updateCurrent();
+});
+
+showBtn.addEventListener("click", () => addContainer.classList.add("show"));
+hideBtn.addEventListener("click", () => addContainer.classList.remove("show"));
+
+addCardBtn.addEventListener("click", () => {
+  const question = questionTextArea.value;
+  const answer = answerTextArea.value;
+
+  if (question.trim() && answer.trim()) {
+    createCard({ question, answer });
+
+    questionTextArea.value = "";
+    answerTextArea.value = "";
+    addContainer.classList.remove("show");
+
+    cardsData.push({ question, answer });
+    localStorage.setItem("cards", JSON.stringify(cardsData));
+  } else {
+    alert("Please enter question and answer");
+  }
+});
+
+clearBtn.addEventListener("click", () => {
+  localStorage.clear();
+  cardsContainer.innerHTML = ``;
+  window.location.reload();
 });
