@@ -1,9 +1,9 @@
 const cardsEl = [];
 
 const cardsContainer = document.getElementById("cards-container");
-const next = document.getElementById("next");
+const nextBtn = document.getElementById("next");
 const current = document.getElementById("current");
-const prev = document.getElementById("prev");
+const prevBtn = document.getElementById("prev");
 
 let currentActiveCard = 0;
 
@@ -55,6 +55,29 @@ function createCard(card, index) {
 }
 
 function updateCurrent() {
-    current.innerText = `${currentActiveCard+1} / ${cardsEl.length}`
+  current.innerText = `${currentActiveCard + 1} / ${cardsEl.length}`;
 }
 createCards();
+
+nextBtn.addEventListener("click", () => {
+  cardsEl[currentActiveCard].className = "card left";
+  currentActiveCard++;
+  if (currentActiveCard > cardsEl.length - 1) {
+    currentActiveCard = cardsEl.length - 1;
+  }
+
+  cardsEl[currentActiveCard].className = "card active";
+
+  updateCurrent();
+});
+prevBtn.addEventListener("click", () => {
+  cardsEl[currentActiveCard].className = "card right";
+  currentActiveCard--;
+  if (currentActiveCard < 0) {
+    currentActiveCard = 0;
+  }
+
+  cardsEl[currentActiveCard].className = "card active";
+
+  updateCurrent();
+});
