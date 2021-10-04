@@ -12,7 +12,6 @@ async function fetchSongs(term) {
   showDataInDOM(data);
 }
 async function fetchMoreSongs(url) {
-  console.log(url);
   const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
   const data = await res.json();
 
@@ -49,6 +48,20 @@ function showDataInDOM(data) {
     `;
 }
 
+async function showLyrics(artist, songTitle) {
+  const res = await fetch(`${API_URL}/v1/${artist}/${songTitle}`);
+  const data = await res.json();
+
+  const lyrics = data.lyrics.replace(/(\r\n|\n|\r)/g, "<br>");
+
+  result.innerHTML = `
+  <span><strong> ${songTitle} </strong> - ${artist}</span>
+  <h3>${lyrics}</h3>
+  `;
+
+  more.innerHTML = "";
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -58,5 +71,13 @@ form.addEventListener("submit", (e) => {
     alert("Please enter something...");
   } else {
     fetchSongs(term);
+  }
+});
+
+result.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON") {
+    const artist = e.target.getAttribute("data-artist");
+    const songTitle = e.target.getAttribute("data-songtitle");
+    showLyrics(artist, songTitle);
   }
 });
