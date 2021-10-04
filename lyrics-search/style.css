@@ -23,7 +23,6 @@ button:active {
 
 header {
   background: url("https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80");
-
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -78,4 +77,45 @@ form button {
   border: none;
   top: 2px;
   right: 4px;
+}
+
+.container{
+    margin: 30px auto;
+}
+.container p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.songs {
+  list-style-type: none;
+  margin: 16px auto;
+  width: 50%;
+  }
+
+.songs li {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.btn {
+  background-color: rgb(180, 52, 231);
+  border-radius: 50px;
+  color: white;
+  border: none;
+  padding: 4px 12px;
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#more .btn{
+    margin: 0 8px;
+    padding: 8px 20px;
+    font-size: 16px;
 }
