@@ -89,8 +89,8 @@ form button {
   font-weight: 300;
 }
 
-.container span {
-  font-size: 2em;
+.container h2 span {
+  font-size: 32px;
 }
 .container p {
   text-align: center;

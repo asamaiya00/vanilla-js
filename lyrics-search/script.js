@@ -55,7 +55,7 @@ async function showLyrics(artist, songTitle) {
   const lyrics = data.lyrics.replace(/(\r\n|\n|\r)/g, "<br>");
 
   result.innerHTML = `
-  <span><strong> ${songTitle} </strong> - ${artist}</span>
+  <h2><span><strong> ${songTitle} </strong> - ${artist}</span></h2>
   <h3>${lyrics}</h3>
   `;
 
