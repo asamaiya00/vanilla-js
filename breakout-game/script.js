@@ -1,6 +1,56 @@
 const rulesBtn = document.getElementById("rules-btn");
 const closeBtn = document.getElementById("close-btn");
 const rules = document.getElementById("rules");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let score = 0;
 
 rulesBtn.addEventListener("click", () => rules.classList.add("show"));
 closeBtn.addEventListener("click", () => rules.classList.remove("show"));
+
+const ball = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  size: 10,
+  speed: 4,
+  dx: 4,
+  dy: -4,
+};
+
+const paddle = {
+  x: canvas.width / 2 - 40,
+  y: canvas.height - 20,
+  width: 80,
+  height: 10,
+  speed: 8,
+  dx: 0,
+};
+
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+  ctx.fillStyle = "lightseagreen";
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.size, 0, 2 * Math.PI);
+  ctx.fillStyle = "lightseagreen";
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawScore() {
+  ctx.font = "20px Arial";
+  ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
+}
+function draw() {
+  drawBall();
+  drawPaddle();
+  drawScore();
+}
+
+draw()
