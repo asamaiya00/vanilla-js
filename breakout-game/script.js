@@ -82,11 +82,54 @@ function drawBricks() {
   });
 }
 
+function movePaddle() {
+  paddle.x += paddle.dx;
+
+  if (paddle.x + paddle.width > canvas.width) {
+    paddle.x = canvas.width - paddle.width;
+  }
+
+  if (paddle.x < 0) {
+    paddle.x = 0;
+  }
+}
+
 function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawPaddle();
   drawScore();
   drawBricks();
 }
 
-draw();
+function update() {
+  movePaddle();
+
+  draw();
+
+  requestAnimationFrame(update);
+}
+
+update();
+
+function keyDown(e) {
+  if (e.key === "ArrowRight" || e.key === "Right") {
+    paddle.dx = paddle.speed;
+  } else if (e.key === "ArrowLeft" || e.key === "Left") {
+    paddle.dx = -paddle.speed;
+  }
+}
+
+function keyUp(e) {
+  if (
+    e.key === "ArrowRight" ||
+    e.key === "Right" ||
+    e.key === "ArrowLeft" ||
+    e.key === "Left"
+  ) {
+    paddle.dx = 0;
+  }
+}
+
+document.addEventListener("keydown", keyDown);
+document.addEventListener("keyup", keyUp);
