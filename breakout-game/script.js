@@ -85,13 +85,48 @@ function drawBricks() {
 function movePaddle() {
   paddle.x += paddle.dx;
 
-  if (paddle.x + paddle.width > canvas.width) {
-    paddle.x = canvas.width - paddle.width;
+  if (paddle.x + paddle.width > canvas.width - 5) {
+    paddle.x = canvas.width - paddle.width - 5;
   }
 
-  if (paddle.x < 0) {
-    paddle.x = 0;
+  if (paddle.x < 5) {
+    paddle.x = 5;
   }
+}
+
+function moveBall() {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+  if (ball.y - ball.size < 0 || ball.y + ball.size > canvas.height) {
+    ball.dy *= -1;
+  }
+  if (ball.x - ball.size < 0 || ball.x + ball.size > canvas.width) {
+    ball.dx *= -1;
+  }
+  if (
+    ball.y + ball.size > paddle.y &&
+    ball.x - ball.size > paddle.x &&
+    ball.x + ball.size < paddle.x + paddle.width
+  ) {
+    ball.dy = -ball.speed;
+    // ball.dx = -ball.speed;
+  }
+
+  bricks.forEach((column) => {
+    column.forEach((brick) => {
+      if (brick.visible) {
+        if (
+          ball.x - ball.size > brick.x &&
+          ball.x + ball.size < brick.x + brick.w &&
+          ball.y + ball.size > brick.y &&
+          ball.y - ball.size < brick.y + brick.h
+        ) {
+          brick.visible = false;
+          ball.dy *= -1;
+        }
+      }
+    });
+  });
 }
 
 function draw() {
@@ -104,6 +139,7 @@ function draw() {
 
 function update() {
   movePaddle();
+  moveBall();
 
   draw();
 
@@ -117,6 +153,11 @@ function keyDown(e) {
     paddle.dx = paddle.speed;
   } else if (e.key === "ArrowLeft" || e.key === "Left") {
     paddle.dx = -paddle.speed;
+  }
+  if (e.key === "q") {
+    console.log(ball.x, ball.y);
+    ball.dx = 0;
+    ball.dy = 0;
   }
 }
 
