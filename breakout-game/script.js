@@ -123,10 +123,35 @@ function moveBall() {
         ) {
           brick.visible = false;
           ball.dy *= -1;
+
+          increaseScore();
         }
       }
     });
   });
+
+  if (ball.y + ball.size > canvas.height) {
+    score = 0;
+    showAllBricks();
+  }
+}
+
+function increaseScore() {
+  score += 1;
+  if (score % (brickRows * brickColumns) === 0) {
+    score = 0;
+    showAllBricks();
+  }
+}
+
+function showAllBricks() {
+  bricks.forEach((column) => {
+    column.forEach((brick) => {
+      brick.visible = true;
+    });
+  });
+  ball.x = canvas.width / 2;
+  ball.y = canvas.height / 2;
 }
 
 function draw() {
@@ -155,9 +180,12 @@ function keyDown(e) {
     paddle.dx = -paddle.speed;
   }
   if (e.key === "q") {
-    console.log(ball.x, ball.y);
-    ball.dx = 0;
-    ball.dy = 0;
+    ball.dx += ball.speed;
+    ball.dy += ball.speed;
+  }
+  if (e.key === "e") {
+    ball.dx -= ball.speed;
+    ball.dy -= ball.speed;
   }
 }
 
