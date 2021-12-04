@@ -3,10 +3,10 @@ const names = [
     slug: "breakout-game",
     label: "Breakout Game",
   },
-  {
-    slug: "custom-video-player",
-    label: "Custom Video Player",
-  },
+  //   {
+  //     slug: "custom-video-player",
+  //     label: "Custom Video Player",
+  //   },
   {
     slug: "dom-array-methods",
     label: "Dom Array Methods",
@@ -57,7 +57,7 @@ const names = [
   },
   {
     slug: "text-speech-reader",
-    label: "text Speech Reader",
+    label: "Text Speech Reader",
   },
   {
     slug: "typing-game",
@@ -74,8 +74,11 @@ names.forEach((proj) => {
   const card = document.createElement("div");
   card.className = "card";
   card.innerHTML = `
-    <h4>${proj.label}</h4>
-    <a href="${proj.slug}">Live Demo<a/>
+    <img src="./images/${proj.slug}.jpg"/>
+    <div class='info'>
+        <h4>${proj.label}</h4>
+        <a href="${proj.slug}" target='_blank'>Live Demo</a>
+    </div>
   `;
   grid.appendChild(card);
 });
