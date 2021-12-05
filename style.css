@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 #grid {
@@ -21,8 +21,8 @@
   margin: 10px;
   text-align: center;
   position: relative;
-  height: 274px;
-  width: 400px;
+  height: 300px;
+  width: 95%;
   transition: transform 0.3s;
 }
 
@@ -70,4 +70,33 @@ a {
 
 h2 {
   text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 550px) {
+  #grid {
+    grid-template-columns: 1fr;
+    width: 95%;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 550px) {
+  #grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 800px) {
+  #grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  #grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
